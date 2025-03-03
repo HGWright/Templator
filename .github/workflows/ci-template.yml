@@ -1,1 +1,49 @@
+name: Check Diff Between Commits and Create Issue
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-diff:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Get diff between commits
+      id: get-diff
+      run: |
+        git fetch origin main
+        COMMIT1=$(git rev-parse HEAD)
+        COMMIT2=$(git rev-parse HEAD^)
+        DIFF=$(git diff $COMMIT2 $COMMIT1 -- file_to_be_templated.yml file_to_be_templated.yml)
+        echo "::set-output name=diff::$DIFF"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create GitHub Issue
+      uses: octokit/request-action@v2.x
+      with:
+        route: POST /repos/HGWright/Templatee/issues
+        owner: HGWright
+        repo: Templatee
+        title: "The Template for file_to_be_templated.yml has been updated"
+        body: |
+          The template for `file_to_be_templated.yml` has been updated.
+          
+          Consider adopting these changes into the repo, the changes can be found below:
+          
+          The diff between the specified files is as follows:
+          ```
+          ${{ steps.get-diff.outputs.diff }}
+          ```
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
