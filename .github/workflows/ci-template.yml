@@ -39,11 +39,6 @@ jobs:
         repo: Templatee
         title: "The Template for file_to_be_templated.yml has been updated"
         body: |
-          The diff between the specified file is as follows:
-
-          Diff between file_to_be_templated.yml:
-          ```
-          ${{ steps.get-diff.outputs.diff1 }}
-          ```
+          Does this work?
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
