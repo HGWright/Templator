@@ -1,11 +1,17 @@
-name: Check Diff Between Commits and Create Issue
+name: Check diff between latest commits and create an issue if the is a difference.
 
 on:
   push:
     branches:
       - main
+    paths:
+      - templates/**
+
+permissions:
+  issues: write
 
 jobs:
+
   check-diff:
     runs-on: ubuntu-latest
 
