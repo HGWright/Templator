@@ -7,6 +7,9 @@ on:
     paths:
       - templates/**
 
+  workflow_dispatch:
+
+
 permissions:
   issues: write
 
@@ -40,7 +43,7 @@ jobs:
     - name: Create GitHub Issue
       uses: octokit/request-action@v2.x
       with:
-        route: POST /repos/HGWright/Templatee/issues
+        route: POST /repos/HGWright/Templatee/issues/#7
         owner: HGWright
         repo: Templatee
         title: "The Template for file_to_be_templated.yml has been updated"
