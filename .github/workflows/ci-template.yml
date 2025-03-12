@@ -37,6 +37,8 @@ jobs:
         COMMIT2=$(git rev-parse HEAD^)
         DIFF=$(git diff $COMMIT2 $COMMIT1 --unified=0 -- templates/file_to_be_templated.yml)
         echo "diff=$DIFF" >> $GITHUB_ENV
+        echo "Captured diff:"
+        echo "$DIFF"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -54,7 +56,7 @@ jobs:
           
           The diff between the specified files is as follows.
           ```
-          ${{ env.diff }}
+            ${{ env.diff }}
           ```
       env:
         GITHUB_TOKEN: ${{ secrets.Template_Token }}
