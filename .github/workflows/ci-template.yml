@@ -35,7 +35,7 @@ jobs:
         git fetch origin main
         COMMIT1=$(git rev-parse HEAD)
         COMMIT2=$(git rev-parse HEAD^)
-        DIFF=$(git diff $COMMIT2 $COMMIT1 -- file_to_be_templated.yml file_to_be_templated.yml)
+        DIFF=$(git diff $COMMIT2 $COMMIT1 -- templates/file_to_be_templated.yml templates/file_to_be_templated.yml)
         echo "::set-output name=diff::$DIFF"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
