@@ -50,4 +50,4 @@ jobs:
         body: |
           Does this work?
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.Template_Token }}
