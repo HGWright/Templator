@@ -50,10 +50,9 @@ jobs:
         body: |
           The template for `file_to_be_templated.yml` has been updated.
           
-          Consider adopting these changes into the repo, the changes can be found below:
+          Consider adopting these changes into the repo, the changes can be found below.
           
           The diff between the specified files is as follows:
-          
           ```
           ${{ steps.get-diff.outputs.diff }}
           ```
