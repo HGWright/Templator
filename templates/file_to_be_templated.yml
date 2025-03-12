@@ -1,8 +1,6 @@
 # This file is to test the proposed method of templating.
 
 # Version of this file
-version: 5.0
+version: 1.0
 
-# Adding a comment to test the templating with an addition.
-
-# Token added
+# This should show up in the diff
