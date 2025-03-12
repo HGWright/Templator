@@ -35,7 +35,7 @@ jobs:
         git fetch origin main
         COMMIT1=$(git rev-parse HEAD)
         COMMIT2=$(git rev-parse HEAD^)
-        DIFF=$(git diff $COMMIT2 $COMMIT1 --unified=0 --no-index -- templates/file_to_be_templated.yml)
+        DIFF=$(git diff --no-index --unified=0 $COMMIT2 $COMMIT1 -- templates/file_to_be_templated.yml)
         echo "diff=$DIFF" >> $GITHUB_ENV
         echo "Captured diff:"
         echo "$DIFF"
