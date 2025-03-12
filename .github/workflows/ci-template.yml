@@ -52,7 +52,7 @@ jobs:
           
           Consider adopting these changes into the repo, the changes can be found below.
           
-          The diff between the specified files is as follows:
+          The diff between the specified files is as follows.
           ```
           ${{ steps.get-diff.outputs.diff }}
           ```
