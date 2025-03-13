@@ -39,7 +39,6 @@ jobs:
         echo "diff<<EOF" >> $GITHUB_ENV
         echo "$DIFF" >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
-
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
