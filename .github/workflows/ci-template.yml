@@ -56,7 +56,7 @@ jobs:
           
           The diff between the specified files is as follows.
           ```
-            ${{ env.diff }}
+            "${{ env.diff }}"
           ```
       env:
         GITHUB_TOKEN: ${{ secrets.Template_Token }}
