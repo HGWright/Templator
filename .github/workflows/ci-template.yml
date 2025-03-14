@@ -31,6 +31,10 @@ jobs:
         git fetch origin main
         echo file_changed=$(git diff --name-only HEAD^ HEAD | grep '^templates/') >> $GITHUB_OUTPUT
 
+    - name: Find repos with file
+      id: find_repos
+      run: python template_config.py repos_per_file_check($file_changed)
+
     - name: Get diff between commits
       id: get-diff
       run: |
@@ -43,21 +47,25 @@ jobs:
         echo "EOF" >> $GITHUB_ENV
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Create GitHub Issue
+        
+  create_issues:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Create GitHub Issues
       uses: octokit/request-action@v2.x
       with:
         route: POST /repos/HGWright/Templatee/issues
         owner: HGWright
         repo: Templatee
-        title: "The Template for file_to_be_templated.yml has been updated"
+        title: "The Template for $file_changed has been updated"
         body: |
           |
-          The template for `file_to_be_templated.yml` has been updated.
+          The template for `$file_changed` has been updated.
           
           Consider adopting these changes into the repo, the changes can be found below.
           
-          The diff between the specified files is as follows.
+          The diff between the specified file is as follows.
           ```diff
           ${{ env.diff }}
           ```
