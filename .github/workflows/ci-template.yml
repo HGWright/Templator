@@ -53,8 +53,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: check-diff
     env:
-      DIFF: ${{ needs.check-diff.output.file }}
-      FILE: ${{ needs.check-diff.output.diff }}
+      DIFF: ${{ needs.check-diff.outputs.file }}
+      FILE: ${{ needs.check-diff.outputs.diff }}
     strategy:
       matrix:
         repo: ["Templatee", "Templatee-2"]
