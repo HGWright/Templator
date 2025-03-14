@@ -75,5 +75,5 @@ jobs:
           ```
       env:
         GITHUB_TOKEN: ${{ secrets.Template_Token }}
-        DIFF: ${{ needs.check-diff.outputs.file }}
-        FILE: ${{ needs.check-diff.outputs.diff }}
+        FILE: ${{ needs.check-diff.outputs.file }}
+        DIFF: ${{ needs.check-diff.outputs.diff }}
