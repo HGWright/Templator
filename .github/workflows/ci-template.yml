@@ -9,10 +9,6 @@ on:
 
   workflow_dispatch:
 
-
-permissions:
-  issues: write
-
 jobs:
 
   check-diff:
@@ -29,13 +25,23 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: Find file changed
+      id: find-changes
+      run: |
+        git fetch origin main
+        CHANGES=$(git diff --name-only HEAD^ HEAD | grep '^templates/')
+        echo "changes<<EOF" >> $GITHUB_ENV
+        echo "$CHANGES" >> $GITHUB_ENV
+        echo "EOF" >> $GITHUB_ENV
+        echo ${{ env.changes }}
+
     - name: Get diff between commits
       id: get-diff
       run: |
         git fetch origin main
         COMMIT1=$(git rev-parse HEAD)
         COMMIT2=$(git rev-parse HEAD^)
-        DIFF=$(git diff $COMMIT2 $COMMIT1 -- templates/file_to_be_templated.yml templates/file_to_be_templated.yml)
+        DIFF=$(git diff $COMMIT2 $COMMIT1 -- templates/${{ env.changes }} templates/${{ env.changes }})
         echo "diff<<EOF" >> $GITHUB_ENV
         echo "$DIFF" >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
