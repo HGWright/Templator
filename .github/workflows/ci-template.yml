@@ -57,16 +57,16 @@ jobs:
         route: POST /repos/{owner}/{repo}/issues
         owner: HGWright
         repo: ${{ matrix.repo }}
-        title: "The Template for needs.check-diff.output.file_changed has been updated"
+        title: "The Template for ${{ needs.check-diff.output.file_changed }} has been updated"
         body: |
           |
-          The template for `needs.check-diff.output.file_changed` has been updated.
+          The template for `${{ needs.check-diff.output.file_changed }}` has been updated.
           
           Consider adopting these changes into the repo, the changes can be found below.
           
           The diff between the specified file is as follows.
           ```diff
-          needs.check-diff.output.diff
+          ${{ needs.check-diff.output.diff }}
           ```
       env:
         GITHUB_TOKEN: ${{ secrets.Template_Token }}
