@@ -38,9 +38,9 @@ jobs:
         COMMIT1=$(git rev-parse HEAD)
         COMMIT2=$(git rev-parse HEAD^)
         DIFF=$(git diff $COMMIT2 $COMMIT1 -- templates/$file_changed templates/$file_changed)
-        echo "diff<<EOF" >> $GITHUB_ENV
-        echo "$DIFF" >> $GITHUB_ENV
-        echo "EOF" >> $GITHUB_ENV
+        echo "diff<<EOF" >> $GITHUB_OUTPUT
+        echo "$DIFF" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
@@ -57,16 +57,16 @@ jobs:
         route: POST /repos/{owner}/{repo}/issues
         owner: HGWright
         repo: ${{ matrix.repo }}
-        title: "The Template for $file_changed has been updated"
+        title: "The Template for needs.check-diff.output.file_changed has been updated"
         body: |
           |
-          The template for `$file_changed` has been updated.
+          The template for `needs.check-diff.output.file_changed` has been updated.
           
           Consider adopting these changes into the repo, the changes can be found below.
           
           The diff between the specified file is as follows.
           ```diff
-          ${{ env.diff }}
+          needs.check-diff.output.diff
           ```
       env:
         GITHUB_TOKEN: ${{ secrets.Template_Token }}
