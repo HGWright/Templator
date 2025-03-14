@@ -14,6 +14,11 @@ jobs:
   check-diff:
     runs-on: ubuntu-latest
 
+    outputs:
+      diff: ${{ steps.get-diff.outputs.diff }}
+      file: ${{ steps.find-changes.outputs.file_changed }}
+      
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -57,10 +62,10 @@ jobs:
         route: POST /repos/{owner}/{repo}/issues
         owner: HGWright
         repo: ${{ matrix.repo }}
-        title: "The Template for ${{ needs.check-diff.output.file_changed }} has been updated"
+        title: "The Template for ${{ needs.check-diff.output.file }} has been updated"
         body: |
           |
-          The template for `${{ needs.check-diff.output.file_changed }}` has been updated.
+          The template for `${{ needs.check-diff.output.file }}` has been updated.
           
           Consider adopting these changes into the repo, the changes can be found below.
           
