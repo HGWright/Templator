@@ -1,6 +1,6 @@
 # This file is to test the proposed method of templating going forwards into the future.
 
-# Version of this file here
-version: 2.2.6
+# Version of this file is here
+version: 2.2.7
 
-# This should show up in the diff aswell too
+# This should show up in the diff aswell.
