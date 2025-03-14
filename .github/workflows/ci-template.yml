@@ -33,7 +33,6 @@ jobs:
 
     - name: Find repos with file
       id: find_repos
-      run: python template_config.py repos_per_file_check($file_changed)
 
     - name: Get diff between commits
       id: get-diff
@@ -50,14 +49,17 @@ jobs:
         
   create_issues:
     runs-on: ubuntu-latest
-    
+    needs: check-diff
+    strategy:
+      matrix:
+        repo: ["Templatee", "Templatee-2"]
     steps:
     - name: Create GitHub Issues
       uses: octokit/request-action@v2.x
       with:
-        route: POST /repos/HGWright/Templatee/issues
+        route: POST /repos/{owner}/{repo}/issues
         owner: HGWright
-        repo: Templatee
+        repo: ${{ matrix.repo }}
         title: "The Template for $file_changed has been updated"
         body: |
           |
