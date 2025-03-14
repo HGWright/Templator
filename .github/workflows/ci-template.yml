@@ -31,9 +31,6 @@ jobs:
         git fetch origin main
         echo file_changed=$(git diff --name-only HEAD^ HEAD | grep '^templates/') >> $GITHUB_OUTPUT
 
-    - name: Find repos with file
-      id: find_repos
-
     - name: Get diff between commits
       id: get-diff
       run: |
